@@ -25,7 +25,7 @@ SECRET_KEY = 'd^uvfunjr)7u-f049h^u8kq7#0h-q3w*7$h&ei$76mq_8rd(gn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'www.iteko.su', '127.0.0.1']
 
 
 # Application definition
