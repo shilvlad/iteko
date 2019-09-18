@@ -1,0 +1,74 @@
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{% endblock %} &ndash; Теко</title>
+    {% load static %}
+    <script src="{% static "portal.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "portal.css" %} " />
+</head>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">TK</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item mr-sm-2">
+                <a class="nav-link"  href="/about">О компании</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Сервисы<span class="caret"></span></a>
+                <div class="dropdown-menu" aria-labelledby="themes">
+
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="../help/"></a>
+            </li>
+
+            {%if user.is_authenticated %}
+                <li class="nav-item mr-sm-2">
+                    <a class="nav-link"  href="/accounts/logout">Выйти ({{ user.first_name }})</a>
+                </li>
+                <li class="nav-item mr-sm-2">
+                    <a class="nav-link" href="/accounts/chpwd">Сменить пароль</a>
+                </li>
+            {% endif %}
+        </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+</nav>
+
+{% block content %}
+    Добро пожаловать
+{% endblock %}
+
+
+
+
