@@ -7,9 +7,30 @@
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
+{% load staticfiles %}
+
 
 {% block title %}
-    Добро пожаловать
+    Главная
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-8 col-lg-1">
+
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+                <br><br>
+                <h4>Добро пожаловать</h4>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-1">
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 
