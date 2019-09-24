@@ -21,15 +21,23 @@ class HelpDeskUsers(models.Model):
     def __str__(self):
         return self.user.username
 
+#TODO: Учет смены состояния
 class HelpDeskIncidents(models.Model):
     INCIDENT_TYPES_CHOICES = (
         ('soft', 'Программный сбой'),
         ('zip', 'Расходные материалы'),
         ('crq', 'Запрос на изменение')
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    INCIDENT_STATE_CHOICES = (
+        ('new', 'Новый'),
+        ('worked', 'В работе'),
+        ('wait', 'В ожидании'),
+        ('done', "Выполнена"),
+        ('closed', "Закрыта"),
+        ('rework',"Доработка")
+    )
+    user = models.ForeignKey(HelpDeskUsers, on_delete=models.CASCADE)
     incident_type = models.CharField(max_length=100, choices=INCIDENT_TYPES_CHOICES)
-    description = models.TextField(max_length = 3000)
-    timestamp_created = models.DateTimeField(editable=False, blank=True, auto_now_add=True)
-
-
+    description = models.TextField(max_length=3000)
+    timestamp_created = models.DateTimeField(auto_now_add=True, blank=True)
+    state = models.CharField(max_length=100, choices=INCIDENT_STATE_CHOICES,editable=False, default='new')

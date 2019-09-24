@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% load staticfiles %}
+
+
+{% block title %}
+    Заявка № {{ inc.id }}
+{% endblock %}
+
+{% block content %}
+    <h4></h4>
+
+
+    <div class="jumbotron">
+        <h5 class="display-5">Заявка № {{ inc.id }} - ({{ inc.state }})</h5>
+        <p class="lead">{{ inc.description }}</p>
+        <hr class="my-4">
+        <p></p>
+        <p class="lead">
+            <a class="btn btn-secondary" href="/helpdesk/" role="button">Вернуться</a>
+            {% for ab in accessible_buttons %}
+
+                <a class="btn btn-primary" href="../changestate/{{ inc.id }}/{{ ab }}" role="button">Установить {{ ab }}</a>
+            {% endfor %}
+
+
+
+
+
+        </p>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block debug %}
+
+    {{ inc.id}}
+    {{ accessible_buttons }}
+
+
+{% endblock %}

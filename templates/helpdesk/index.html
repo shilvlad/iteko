@@ -41,9 +41,8 @@
                         <div class="modal-body">
                             <form action="/helpdesk/add_incident" method="post">
                                 {% csrf_token %}
-                                <!-- {% bootstrap_form form layout='inline' %} -->
-                                {{ form }}
-                                <input type="submit" value="Submit">
+                                {% bootstrap_form form layout='inline' %}
+                                <button type="submit" class="btn btn-primary">Создать заявку</button>
                             </form>
                         </div>
 
@@ -66,7 +65,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Автор</th>
+
                         <th>Создана</th>
                         <th>Описание</th>
                         <th>Тип</th>
@@ -77,11 +76,11 @@
                     {% for i in own_incidents %}
                         <tr>
                             <td>{{ i.id }}</td>
-                            <td>{{ i.user }}</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
+
+                            <td>{{ i.timestamp_created| date:"d.m.Y H:m" }}</td>
+                            <td>{{ i.description }}</td>
+                            <td>{{ i.incident_type }}</td>
+                            <td>{{ i.state }}</td>
                         </tr>
                     {% endfor %}
 
@@ -99,31 +98,30 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>F1</th>
-                        <th>F2</th>
-                        <th>F3</th>
-                        <th>F4</th>
-                        <th>F5</th>
-                        <th>F6</th>
+                        <th>ID</th>
+                        <th>Автор</th>
+                        <th>Создана</th>
+                        <th>Описание</th>
+                        <th>Тип</th>
+                        <th>Статус</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                    </tr>
+                    {% for i in users_incidents %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+                            <td>{{ i.timestamp_created| date:"d.m.Y H:m" }}</td>
+                            <td>{{ i.description }}</td>
+                            <td>{{ i.incident_type }}</td>
+                            <td>{{ i.state }}</td>
+                            <td>
+                                <a href="open/{{ i.id }} " ><img src="{% static "icons/16x16/pen.png" %} "></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
                     </tbody>
                 </table>
             </div>
@@ -137,6 +135,36 @@
 {% block debug %}
     {{ helpdeskuser }}<br>
     {{ helpdeskuserroles }} <br>
+
+
+
+{% endblock %}
+
+{% block popup %}
+
+{% if 'serviceman'  in helpdeskuserroles  or 'admin' in helpdeskuserroles  %}
+    {% for i in new_incidents %}
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="{% static "icons/16x16/spam.png" %}" class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Заявка № {{ i.id }}</strong><br>
+            <small>Создана {{ i.timestamp_created|timesince }} назад</small>
+            <!--
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            -->
+
+        </div>
+        <div class="toast-body">
+            <small>{{ request.user.first_name }} {{ request.user.last_name }}</small>
+            <br>
+            <small>{{ i.description }}</small>
+
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
 
 
 

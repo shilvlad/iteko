@@ -9,7 +9,7 @@ class IncidentForm(ModelForm):
         model = HelpDeskIncidents
         fields = '__all__'
         #fields = ['user', 'incident_type', 'description', ]
-        exclude = ['timestamp_created']
+        #exclude = ['timestamp_created']
         labels = {
             "description": "Описание",
         }
