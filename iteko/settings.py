@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [u'www.iteko.su', '127.0.0.1']
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'bootstrap4',
     'helpdesk',
-    'accounts'
+    'accounts',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
