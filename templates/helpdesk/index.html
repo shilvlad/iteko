@@ -22,7 +22,7 @@
 
             <!-- Button to Open the Modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                <img src="{% static "icons/16x16/add.png" %} "> cоздать заявку
+                <img src="{% static "main/icons/16x16/add.png" %} "> cоздать заявку
             </button>
 
             <!-- The Modal -->
@@ -117,7 +117,7 @@
                             <td>{{ i.incident_type }}</td>
                             <td>{{ i.state }}</td>
                             <td>
-                                <a href="open/{{ i.id }} " ><img src="{% static "icons/16x16/pen.png" %} "></a>
+                                <a href="open/{{ i.id }} " ><img src="{% static "main/icons/16x16/pen.png" %} "></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -145,7 +145,7 @@
     {% for i in new_incidents %}
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <img src="{% static "icons/16x16/spam.png" %}" class="rounded mr-2" alt="...">
+            <img src="{% static "main/icons/16x16/spam.png" %}" class="rounded mr-2" alt="...">
             <strong class="mr-auto">Заявка № {{ i.id }}</strong><br>
             <small>Создана {{ i.timestamp_created|timesince }} назад</small>
             <!--
