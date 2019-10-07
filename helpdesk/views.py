@@ -35,7 +35,7 @@ def index(request):
 
     users_incidents = HelpDeskIncidents.objects.all()
     new_incidents = HelpDeskIncidents.objects.filter(state='new')
-    print (request.user.first_name)
+
     context = {
         'helpdeskuser' : helpdeskuser,
         'helpdeskuserroles' : helpdeskuserroles,

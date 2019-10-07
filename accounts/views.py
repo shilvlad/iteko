@@ -18,6 +18,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.hashers import check_password
 from django.views.generic import CreateView
 from django.utils import timezone
+from .models import Profile, ProfileBasicSettings
+from .forms import ProfileForm, ProfileBasicSettingsForm
 
 def user_login(request):
     context = {}
@@ -39,6 +41,20 @@ def user_login(request):
     else:
         context['next_url'] = next_url
         return render(request, 'accounts/login.html', context)
+
+def user_signup(request):
+    template = loader.get_template('accounts/signup.html')
+    if request.method == 'POST':
+        print ("Создаем запрос на регистрацию")
+        pass
+    else:
+        pass
+
+    context = {
+
+    }
+
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def user_logout(request):
@@ -65,16 +81,16 @@ def user_chpwd(request):
 
     return render(request, 'accounts/chpwd.html',{'form': form, 'user': u})
 
-def user_signup(request):
-    template = loader.get_template('accounts/signup.html')
-    if request.method == 'POST':
-        print ("Создаем запрос на регистрацию")
-        pass
-    else:
-        pass
+@login_required
+def user_profile(request):
+    template = loader.get_template('accounts/profile.html')
+    profile = Profile.objects.get(user = request.user)
+
 
     context = {
+        'profile' : profile,
+
+
 
     }
-
     return HttpResponse(template.render(context, request))

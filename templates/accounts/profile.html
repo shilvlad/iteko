@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block title %}
+    Главная
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-1">
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+
+                {{ profile }}
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-1">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
