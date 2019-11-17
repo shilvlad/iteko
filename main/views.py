@@ -12,7 +12,7 @@ def index(request):
     context = {
         'news': news,
     }
-    print (news)
+    #print (news)
     return HttpResponse(template.render(context, request))
 
 

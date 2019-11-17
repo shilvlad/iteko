@@ -83,14 +83,35 @@ def user_chpwd(request):
 
 @login_required
 def user_profile(request):
-    template = loader.get_template('accounts/profile.html')
-    profile = Profile.objects.get(user = request.user)
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        profile_form = ProfileForm(request.POST, instance=profile)
+
+        profilebasicsettings = ProfileBasicSettings.objects.get(user=request.user)
+        profilebasicsettings_form = ProfileBasicSettingsForm(request.POST, instance=profilebasicsettings)
+
+        if profile_form.is_valid() and profilebasicsettings_form.is_valid():
+            profile_form.save()
+            profilebasicsettings_form.save()
+        else:
+            print(profile_form.errors)
+            print(profilebasicsettings_form.errors)
 
 
-    context = {
-        'profile' : profile,
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        template = loader.get_template('accounts/profile.html')
 
+        profile = Profile.objects.get(user = request.user)
+        profile_form = ProfileForm(instance = profile)
 
+        profilebasicsettings = ProfileBasicSettings.objects.get(user=request.user)
+        profilebasicsettings_form = ProfileBasicSettingsForm(instance=profilebasicsettings)
 
-    }
-    return HttpResponse(template.render(context, request))
+        context = {
+            'profile' : profile,
+            'profile_form': profile_form,
+            'profilebasicsettings_form' : profilebasicsettings_form,
+        }
+        return HttpResponse(template.render(context, request))
+

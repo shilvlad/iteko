@@ -12,11 +12,11 @@ class ProfileForm(ModelForm):
 
         }
 
+
 class ProfileBasicSettingsForm(ModelForm):
     class Meta:
         model = ProfileBasicSettings
         fields = '__all__'
-
         labels = {
-
         }
+

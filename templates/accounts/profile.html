@@ -21,8 +21,28 @@
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#main">Основные</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#bio">Био</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade show active" id="main">
+                            {{ form.non_field_errors }}
+                            {% bootstrap_form profilebasicsettings_form layout='inline' %}
+                        </div>
+                        <div class="tab-pane fade" id="bio">
+                            {% bootstrap_form profile_form layout='inline' %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
 
-                {{ profile }}
 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-1">
