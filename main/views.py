@@ -6,7 +6,7 @@ from .models import MainNews
 
 
 def index(request):
-    template = loader.get_template('main/index.html')
+    template = loader.get_template('main/about.html')
     news = MainNews.objects.all()
 
     context = {
@@ -22,4 +22,5 @@ def about(request):
         #'latest_question_list': latest_question_list,
     }
     return HttpResponse(template.render(context, request))
+
 
